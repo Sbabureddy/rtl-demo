@@ -1,8 +1,7 @@
-import logo from './logo.svg';
-import './App.css';
-import SayHello from './components/SayHello';
-import Counter from './components/Counter';
-import Posts from './components/Posts';
+import "./App.css";
+import SayHello from "./components/SayHello";
+import Counter from "./components/Counter";
+import Posts from "./components/Posts";
 
 function App() {
   return (
