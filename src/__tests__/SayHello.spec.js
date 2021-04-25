@@ -10,6 +10,7 @@ describe('<SayHello name="Jhon"/>', () => {
       expect(screen.getByText('Hello Jhon!')).toBeInTheDocument()
     })
     it('renders hello howdy to the dom', () => {
+        // @ts-ignore
         render(<SayHello />);
       expect(screen.getByText('Howdy!')).toBeInTheDocument()
     })
