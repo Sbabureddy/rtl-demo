@@ -10,8 +10,9 @@ script:
 deploy:
   provider: pages
   skip_cleanup: true
-  github_token: upskYpJ5pTwouLJF0zlMttBhF9GGnGyhV # Set in the settings page of your repository, as a secure variable
+  github_token: $GITHUB_TOKEN # Set in the settings page of your repository, as a secure variable
   keep_history: true
   on:
-    branch: master
+    branch: main
+repo_token: upskYpJ5pTwouLJF0zlMttBhF9GGnGyhV
 after_success: npm run coverage
