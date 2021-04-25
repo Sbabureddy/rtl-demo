@@ -15,4 +15,3 @@ deploy:
   on:
     branch: main
 repo_token: upskYpJ5pTwouLJF0zlMttBhF9GGnGyhV
-after_success: npm run coverage
