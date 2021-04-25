@@ -15,6 +15,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
+    "coverage": "npm run test && jest --coverage && cat ./coverage/lcov.info | coveralls",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
@@ -35,5 +36,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "coveralls": "^3.1.0"
   }
 }
