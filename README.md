@@ -1,5 +1,7 @@
 # Getting Started with Create React App
 
+[![Build Status](https://travis-ci.com/Sbabureddy/cra-testing.svg?branch=master)](https://travis-ci.com/Sbabureddy/cra-testing)
+
 [![Coverage Status](https://coveralls.io/repos/github/Sbabureddy/cra-testing/badge.svg?branch=master)](https://coveralls.io/github/Sbabureddy/cra-testing?branch=master)
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
