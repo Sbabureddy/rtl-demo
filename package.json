@@ -15,8 +15,8 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "coverage": "npm run test && jest --coverage  --watchAll && cat ./coverage/lcov.info | coveralls",
     "test": "react-scripts test",
+    "test:coveralls": "jest --coverage && coveralls < coverage/lcov.info",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
