@@ -5,15 +5,8 @@ cache:
   directories:
     - node_modules
 script:
-  - npm run test:coveralls
   - npm run build
 notifications:
   email: false
-deploy:
-  provider: pages
-  skip_cleanup: true
-  github_token: $GITHUB_TOKEN # Set in the settings page of your repository, as a secure variable
-  keep_history: true
-  on:
-    branch: main
+
 repo_token: upskYpJ5pTwouLJF0zlMttBhF9GGnGyhV
