@@ -8,7 +8,7 @@ script:
   - npm run test:coveralls
   - npm run build
 notifications:
-  emal: false
+  email: false
 deploy:
   provider: pages
   skip_cleanup: true

@@ -1,4 +1,5 @@
 module.exports = {
+  collectCoverage: true,
   collectCoverageFrom: [
     "!src/index.js",
     "!src/reportWebVitals.js",
@@ -13,5 +14,5 @@ module.exports = {
       statements: 80,
     },
   },
-  coverageReporters: ["text"],
+  coverageReporters: ["json", "text", "html", "lcov"],
 };
