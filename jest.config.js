@@ -1,11 +1,10 @@
 module.exports = {
   collectCoverage: true,
   collectCoverageFrom: [
-    "!src/index.js",
-    "!src/reportWebVitals.js",
     "src/**/*.{js,jsx}",
-    "!<rootDir>/node_modules/",
+    "!<rootDir>/src/reportWebVitals.js",
   ],
+  coveragePathIgnorePatterns: ["src/index.js", "src/reportWebVitals.js"],
   coverageThreshold: {
     global: {
       branches: 50,

@@ -1,7 +1,7 @@
 import React from "react";
 import { cleanup, screen, render, waitFor } from "@testing-library/react";
-import Posts from "../components/Posts";
 import mockedAxios from "axios";
+import Posts from "../components/Posts";
 
 afterEach(cleanup);
 

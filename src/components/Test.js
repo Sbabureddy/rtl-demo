@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 
 import axios from "axios";
+
 function Test() {
   const [data, setData] = useState([]);
   useEffect(() => {
@@ -14,9 +15,9 @@ function Test() {
   return (
     <div className="App">
       <ul style={{ textAlign: "left" }}>
-        {data.map((item, key) => {
-          return <li key={key}>{item.title}</li>;
-        })}
+        {data.map((item, key) => (
+          <li key={key}>{item.title}</li>
+        ))}
       </ul>
     </div>
   );

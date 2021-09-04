@@ -1,13 +1,26 @@
 language: node_js
 node_js:
   - 10
+
+services:
+  - docker
+
 cache:
   directories:
     - node_modules
+
 script:
   - npm run test
   - npm run coverage
   - npm run coveralls
   - npm run build
+
+after_success:
+  - docker build -t sbabureddy/rtl-demo:1.0.0-dev .
+
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+
+  - docker push sbabureddy/rtl-demo:1.0.0-dev
+
 notifications:
   email: false

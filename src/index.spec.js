@@ -1,5 +1,4 @@
-import React from "react";
-import ReactDOM from "react-dom";
+import { render } from "react-dom";
 import { strictMode, rootElem } from "./index";
 
 jest.mock("react-dom", () => ({
@@ -8,7 +7,7 @@ jest.mock("react-dom", () => ({
 
 describe("index.js", () => {
   it("renders without crashing", () => {
-    ReactDOM.render(strictMode, rootElem);
-    expect(ReactDOM.render).toHaveBeenCalledWith(strictMode, rootElem);
+    render(strictMode, rootElem);
+    expect(render).toHaveBeenCalledWith(strictMode, rootElem);
   });
 });

@@ -3,6 +3,7 @@ import { render, waitFor, cleanup } from "@testing-library/react";
 
 import mockedAxios from "axios";
 import Test from "../components/Test";
+
 afterEach(cleanup);
 test("mocking axios request", async () => {
   const data = {
