@@ -13,15 +13,10 @@ function Counter() {
   };
   return (
     <div>
-      <button data-testid="count" onClick={handleCount}>
-        You Clicked - {count} times
-      </button>
-      <button data-testid="count-dec" onClick={handleDecrement}>
-        You Clicked - {count} times
-      </button>
-      <button data-testid="count-zero" onClick={handleReset}>
-        You Clicked - {count} times
-      </button>
+      <p data-testid="count">You Clicked - {count} times</p>
+      <button onClick={handleCount}>+</button>
+      <button onClick={handleDecrement}>-</button>
+      <button onClick={handleReset}>reset</button>
     </div>
   );
 }

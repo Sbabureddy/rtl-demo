@@ -6,33 +6,45 @@ afterEach(cleanup);
 
 describe("<Counter />", () => {
   it("count incremented button clicks", () => {
-    const { getByTestId } = render(<Counter />);
-    fireEvent.click(getByTestId("count"));
-    expect(screen.getByTestId("count")).toHaveTextContent(
-      "You Clicked - 1 times"
-    );
+    const incFn = jest.fn();
+    const { getByTestId, getByRole } = render(<Counter />);
+    const plusBtn = getByRole("button", {
+      name: /\+/i,
+    });
+    const counter = getByTestId("count");
+    fireEvent.click(plusBtn);
+    expect(counter).toHaveTextContent("You Clicked - 1 times");
   });
-  it("count decremented button click", () => {
-    const { getByTestId } = render(<Counter />);
-    fireEvent.click(getByTestId("count"));
-    fireEvent.click(getByTestId("count"));
-    fireEvent.click(getByTestId("count"));
-    fireEvent.click(getByTestId("count-dec"));
-    expect(screen.getByTestId("count-dec")).toHaveTextContent(
-      "You Clicked - 2 times"
-    );
+
+  it("count decremented button clicks", () => {
+    const { getByTestId, getByRole } = render(<Counter />);
+    const negBtn = getByRole("button", {
+      name: /\-/i,
+    });
+    const counter = getByTestId("count");
+    fireEvent.click(negBtn);
+    expect(counter).toHaveTextContent("You Clicked - -1 times");
   });
-  it("set count zero", () => {
-    const { getByTestId } = render(<Counter />);
-    fireEvent.click(getByTestId("count"));
-    fireEvent.click(getByTestId("count-dec"));
-    fireEvent.click(getByTestId("count"));
-    fireEvent.click(getByTestId("count-dec"));
-    fireEvent.click(getByTestId("count"));
-    fireEvent.click(getByTestId("count"));
-    fireEvent.click(getByTestId("count-zero"));
-    expect(screen.getByTestId("count-zero")).toHaveTextContent(
-      "You Clicked - 0 times"
-    );
+  it("count reset button clicks", () => {
+    const { getByTestId, getByRole } = render(<Counter />);
+    const plusBtn = getByRole("button", {
+      name: /\+/i,
+    });
+    fireEvent.click(plusBtn);
+    fireEvent.click(plusBtn);
+    fireEvent.click(plusBtn);
+
+    const negBtn = getByRole("button", {
+      name: /\-/i,
+    });
+    const counter = getByTestId("count");
+    fireEvent.click(negBtn);
+
+    const resBtn = getByRole("button", {
+      name: /reset/i,
+    });
+
+    fireEvent.click(resBtn);
+    expect(counter).toHaveTextContent("You Clicked - 0 times");
   });
 });

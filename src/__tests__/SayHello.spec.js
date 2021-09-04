@@ -5,7 +5,6 @@ import SayHello from "../components/SayHello";
 afterEach(cleanup);
 
 describe('<SayHello name="Jhon"/>', () => {
-
   it("renders hello jhon to the dom", () => {
     render(<SayHello name="Jhon" />);
     expect(screen.getByText(/jhon/i)).toBeInTheDocument();
@@ -18,7 +17,7 @@ describe('<SayHello name="Jhon"/>', () => {
   });
 
   it("renders hello michael to the dom", () => {
-    render(<SayHello name="Michael" />);
-    expect(screen.queryByText(/michael/i)).toBeInTheDocument();
+    render(<SayHello name="Babu" />);
+    expect(screen.queryByText(/babu/i)).toBeInTheDocument();
   });
 });

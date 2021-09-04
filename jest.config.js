@@ -2,7 +2,7 @@ module.exports = {
   collectCoverage: true,
   collectCoverageFrom: [
     "src/**/*.{js,jsx}",
-    "!<rootDir>/src/reportWebVitals.js",
+    "!src/reportWebVitals.js",
   ],
   coveragePathIgnorePatterns: ["src/index.js", "src/reportWebVitals.js"],
   coverageThreshold: {
