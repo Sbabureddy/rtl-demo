@@ -6,7 +6,7 @@ import Paginate from "./components/Paginate";
 function App() {
   return (
     <div className="App">
-      <h2>React Testing Library Demo App Travis CI/CD</h2>
+      <h2>React Testing Library Demo App Version:1.0.0-dev from Travis CI/CD</h2>
       <SayHello name="React" />
       <Counter />
       <Paginate />

@@ -16,11 +16,17 @@ script:
   - npm run build
 
 after_success:
-  - docker build -t sbabureddy/rtl-demo:1.0.0-dev .
+  - docker build -t $DOCKER_USERNAME/rtl-demo-1.0.0-dev .
 
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
 
-  - docker push sbabureddy/rtl-demo:1.0.0-dev
+  - docker push $DOCKER_USERNAME/rtl-demo-1.0.0-dev
+
+  - docker pull $DOCKER_USERNAME/rtl-demo-1.0.0-dev
+
+  - docker run -p 8080:8080 $DOCKER_USERNAME/rtl-demo-1.0.0-dev
+
+  - docker ps -a
 
 notifications:
   email: false
