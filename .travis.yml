@@ -4,7 +4,7 @@ services:
   - docker
 
 env:
-  - NODE_VERSION=10-jessie
+  - NODE_VERSION=node
 
 cache:
   directories:
