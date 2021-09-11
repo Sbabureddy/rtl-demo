@@ -12,7 +12,7 @@ cache:
 
 script:
   - docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD"
-  - docker build -t node:$NODE_VERSION --build-arg NODE_IMAGE="node:${NODE_VERSION}" .
+  - docker build -t node:$NODE_VERSION --build-arg NODE_IMAGE="node:14-alpine" .
   - docker images
   - docker tag node:$NODE_VERSION $DOCKER_USERNAME/rtl-demo:$NODE_VERSION-$(git rev-parse HEAD)
   - docker push $DOCKER_USERNAME/rtl-demo:$NODE_VERSION-$(git rev-parse HEAD)
