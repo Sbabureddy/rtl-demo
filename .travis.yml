@@ -5,6 +5,7 @@ services:
 
 env:
   - NODE_VERSION=10-jessie
+  - NODE_VERSION=14-alpine
 
 cache:
   directories:
