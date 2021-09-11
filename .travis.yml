@@ -1,16 +1,10 @@
 sudo: required
 
-# services:
-#   - docker
-
-addons:
-  sonarcloud:
-    organization: "rtl"
-    token:
-      secure: $SONAR_TOKEN
+services:
+  - docker
 
 env:
-  # - NODE_VERSION=10-jessie
+  - NODE_VERSION=10-jessie
   - NODE_VERSION=14-alpine
 
 cache:
@@ -18,12 +12,11 @@ cache:
     - node_modules
 
 script:
-  # - docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD"
-  # - docker build -t node:$NODE_VERSION  .
-  # - docker images
-  # - docker tag node:$NODE_VERSION $DOCKER_USERNAME/rtl-demo:$NODE_VERSION-$(git rev-parse HEAD)
-  # - docker push $DOCKER_USERNAME/rtl-demo:$NODE_VERSION-$(git rev-parse HEAD)
-  - sonar-scanner
+  - docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD"
+  - docker build -t node:$NODE_VERSION  .
+  - docker images
+  - docker tag node:$NODE_VERSION $DOCKER_USERNAME/rtl-demo:$NODE_VERSION-$(git rev-parse HEAD)
+  - docker push $DOCKER_USERNAME/rtl-demo:$NODE_VERSION-$(git rev-parse HEAD)
 
 stages:
   - test
@@ -35,8 +28,7 @@ jobs:
       name: "Test 14-alpine"
       install: skip
       script:
-        # - docker run --rm $DOCKER_USERNAME/rtl-demo:$NODE_VERSION-$(git rev-parse HEAD) npm run $NPM_TARGET
-        - npm run test
+        - docker run --rm $DOCKER_USERNAME/rtl-demo:$NODE_VERSION-$(git rev-parse HEAD) npm run $NPM_TARGET
       env:
         - NODE_VERSION=14-alpine
         - NPM_TARGET=test
@@ -44,8 +36,7 @@ jobs:
       name: "Coverage 14-alpine"
       install: skip
       script:
-        # - docker run --rm $DOCKER_USERNAME/rtl-demo:$NODE_VERSION-$(git rev-parse HEAD) npm run $NPM_TARGET
-        - npm run coverage
+        - docker run --rm $DOCKER_USERNAME/rtl-demo:$NODE_VERSION-$(git rev-parse HEAD) npm run $NPM_TARGET
       env:
         - NODE_VERSION=14-alpine
         - NPM_TARGET=coverage
@@ -53,35 +44,34 @@ jobs:
       name: "Build 14-alpine"
       install: skip
       script:
-        # - docker run --rm $DOCKER_USERNAME/rtl-demo:$NODE_VERSION-$(git rev-parse HEAD) npm run $NPM_TARGET
-        - npm run build
+        - docker run --rm $DOCKER_USERNAME/rtl-demo:$NODE_VERSION-$(git rev-parse HEAD) npm run $NPM_TARGET
       env:
         - NODE_VERSION=14-alpine
         - NPM_TARGET=build
-    # - stage: npm-targets
-    #   name: "Test 10-jessie"
-    #   install: skip
-    #   script:
-    #     - docker run --rm $DOCKER_USERNAME/rtl-demo:$NODE_VERSION-$(git rev-parse HEAD) npm run $NPM_TARGET
-    #   env:
-    #     - NODE_VERSION=14-alpine
-    #     - NPM_TARGET=test
-    # - stage: npm-targets
-    #   name: "Coverage 10-jessie"
-    #   install: skip
-    #   script:
-    #     - docker run --rm $DOCKER_USERNAME/rtl-demo:$NODE_VERSION-$(git rev-parse HEAD) npm run $NPM_TARGET
-    #   env:
-    #     - NODE_VERSION=10-jessie
-    #     - NPM_TARGET=coverage
-    # - stage: npm-targets
-    #   name: "Build 10-jessie"
-    #   install: skip
-    #   script:
-    #     - docker run --rm $DOCKER_USERNAME/rtl-demo:$NODE_VERSION-$(git rev-parse HEAD) npm run $NPM_TARGET
-    #   env:
-    #     - NODE_VERSION=10-jessie
-    #     - NPM_TARGET=build
+    - stage: npm-targets
+      name: "Test 10-jessie"
+      install: skip
+      script:
+        - docker run --rm $DOCKER_USERNAME/rtl-demo:$NODE_VERSION-$(git rev-parse HEAD) npm run $NPM_TARGET
+      env:
+        - NODE_VERSION=14-alpine
+        - NPM_TARGET=test
+    - stage: npm-targets
+      name: "Coverage 10-jessie"
+      install: skip
+      script:
+        - docker run --rm $DOCKER_USERNAME/rtl-demo:$NODE_VERSION-$(git rev-parse HEAD) npm run $NPM_TARGET
+      env:
+        - NODE_VERSION=10-jessie
+        - NPM_TARGET=coverage
+    - stage: npm-targets
+      name: "Build 10-jessie"
+      install: skip
+      script:
+        - docker run --rm $DOCKER_USERNAME/rtl-demo:$NODE_VERSION-$(git rev-parse HEAD) npm run $NPM_TARGET
+      env:
+        - NODE_VERSION=10-jessie
+        - NPM_TARGET=build
 
 notifications:
   email: false
