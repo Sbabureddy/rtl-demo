@@ -18,5 +18,60 @@ script:
   - docker tag node:$NODE_VERSION $DOCKER_USERNAME/rtl-demo:$NODE_VERSION-$(git rev-parse HEAD)
   - docker push $DOCKER_USERNAME/rtl-demo:$NODE_VERSION-$(git rev-parse HEAD)
 
+stages:
+  - test
+  - npm-targets
+
+jobs:
+  include:
+    - stage: npm-targets
+      name: "Test 14-alpine"
+      install: skip
+      script:
+        - docker run --rm $DOCKER_USERNAME/rtl-demo:$NODE_VERSION-$(git rev-parse HEAD) npm run $NPM_TARGET
+      env:
+        - NODE_VERSION=14-alpine
+        - NPM_TARGET=test
+    - stage: npm-targets
+      name: "Coveralls 14-alpine"
+      install: skip
+      script:
+        - docker run --rm $DOCKER_USERNAME/rtl-demo:$NODE_VERSION-$(git rev-parse HEAD) npm run $NPM_TARGET
+      env:
+        - NODE_VERSION=14-alpine
+        - NPM_TARGET=coveralls
+    - stage: npm-targets
+      name: "Build 14-alpine"
+      install: skip
+      script:
+        - docker run --rm $DOCKER_USERNAME/rtl-demo:$NODE_VERSION-$(git rev-parse HEAD) npm run $NPM_TARGET
+      env:
+        - NODE_VERSION=10-jessie
+        - NPM_TARGET=build
+    - stage: npm-targets
+      name: "Test 10-jessie"
+      install: skip
+      script:
+        - docker run --rm $DOCKER_USERNAME/rtl-demo:$NODE_VERSION-$(git rev-parse HEAD) npm run $NPM_TARGET
+      env:
+        - NODE_VERSION=14-alpine
+        - NPM_TARGET=test
+    - stage: npm-targets
+      name: "Coveralls 10-jessie"
+      install: skip
+      script:
+        - docker run --rm $DOCKER_USERNAME/rtl-demo:$NODE_VERSION-$(git rev-parse HEAD) npm run $NPM_TARGET
+      env:
+        - NODE_VERSION=10-jessie
+        - NPM_TARGET=coveralls
+    - stage: npm-targets
+      name: "Build 10-jessie"
+      install: skip
+      script:
+        - docker run --rm $DOCKER_USERNAME/rtl-demo:$NODE_VERSION-$(git rev-parse HEAD) npm run $NPM_TARGET
+      env:
+        - NODE_VERSION=10-jessie
+        - NPM_TARGET=build
+
 notifications:
   email: false
