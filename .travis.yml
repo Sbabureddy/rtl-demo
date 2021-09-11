@@ -3,6 +3,12 @@ sudo: required
 services:
   - docker
 
+addons:
+  sonarcloud:
+    organization: "e3e7402079c30da10a611c40c60c2a22f0886995"
+    token:
+      secure: $SONAR_TOKEN
+
 env:
   - NODE_VERSION=10-jessie
   - NODE_VERSION=14-alpine
@@ -17,6 +23,7 @@ script:
   - docker images
   - docker tag node:$NODE_VERSION $DOCKER_USERNAME/rtl-demo:$NODE_VERSION-$(git rev-parse HEAD)
   - docker push $DOCKER_USERNAME/rtl-demo:$NODE_VERSION-$(git rev-parse HEAD)
+  - sonar-scanner
 
 stages:
   - test
@@ -33,13 +40,13 @@ jobs:
         - NODE_VERSION=14-alpine
         - NPM_TARGET=test
     - stage: npm-targets
-      name: "Coveralls 14-alpine"
+      name: "Coverage 14-alpine"
       install: skip
       script:
         - docker run --rm $DOCKER_USERNAME/rtl-demo:$NODE_VERSION-$(git rev-parse HEAD) npm run $NPM_TARGET
       env:
         - NODE_VERSION=14-alpine
-        - NPM_TARGET=coveralls
+        - NPM_TARGET=coverage
     - stage: npm-targets
       name: "Build 14-alpine"
       install: skip
@@ -57,13 +64,13 @@ jobs:
         - NODE_VERSION=14-alpine
         - NPM_TARGET=test
     - stage: npm-targets
-      name: "Coveralls 10-jessie"
+      name: "Coverage 10-jessie"
       install: skip
       script:
         - docker run --rm $DOCKER_USERNAME/rtl-demo:$NODE_VERSION-$(git rev-parse HEAD) npm run $NPM_TARGET
       env:
         - NODE_VERSION=10-jessie
-        - NPM_TARGET=coveralls
+        - NPM_TARGET=coverage
     - stage: npm-targets
       name: "Build 10-jessie"
       install: skip
