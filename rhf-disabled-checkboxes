@@ -1,0 +1,77 @@
+import * as React from "react";
+import { useForm, useWatch } from "react-hook-form";
+import { useEffect } from "react/cjs/react.production.min";
+import Headers from "./Header";
+import "./styles.css";
+
+let renderCount = 0;
+const checkboxOptions = ["A", "B", "C"];
+
+export default function App() {
+  const { register, handleSubmit, watch } = useForm({
+    defaultValues: {
+      firstName: "",
+      lastName: "",
+      checkbox: [],
+      radio: false,
+      message: "",
+    },
+  });
+
+  const watchingCheckboxs = watch("checkbox");
+  console.log(watchingCheckboxs);
+  const onSubmit = (data) => console.log(data);
+
+  const renderCheckboxes = checkboxOptions.map((option) => (
+    <div key={option} className="check">
+      <input
+        {...register("checkbox")}
+        type="checkbox"
+        id={option}
+        value={option}
+        disabled={watchingCheckboxs.some((item) => {
+          if (item === "C") {
+            return item !== option;
+          }
+        })}
+      />
+      <label htmlFor={option}>{option}</label>
+    </div>
+  ));
+
+  return (
+    <form onSubmit={handleSubmit(onSubmit)}>
+      <Headers renderCount={renderCount} />
+
+      <input
+        {...register("firstName", { required: true })}
+        placeholder="First name"
+      />
+
+      <input
+        {...register("lastName", { minLength: 2 })}
+        placeholder="Last name"
+      />
+
+      <select {...register("category")}>
+        <option value="">Select...</option>
+        <option value="A">Category A</option>
+        <option value="B">Category B</option>
+      </select>
+
+      {renderCheckboxes}
+
+      <input {...register("radio")} type="radio" value="true" />
+
+      <input {...register("radio")} type="radio" value="false" />
+
+      {JSON.parse(watch("radio")) && <>You selected me</>}
+      <textarea
+        {...register("message", { maxLength: 200 })}
+        placeholder="message"
+      />
+
+      <input type="submit" />
+    </form>
+  );
+}
